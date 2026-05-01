@@ -1,11 +1,7 @@
 import streamlit as st
 import time
-from tavily import TavilyClient
 from agents import build_reader_agent, build_search_agent, writer_chain, critic_chain
 
-api_key = st.secrets["TAVILY_API_KEY"]
-
-tavily = TavilyClient(api_key=api_key)
 
 # ── Page config ──────────────────────────────────────────────────────────────
 st.set_page_config(
