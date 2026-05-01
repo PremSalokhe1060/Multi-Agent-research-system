@@ -2,12 +2,19 @@ from langchain.tools import tool
 import requests
 from bs4 import BeautifulSoup
 from tavily import TavilyClient
+import streamlit as st
 import os
 from dotenv import load_dotenv
 from rich import print
 load_dotenv()
 
-tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
+# tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
+api_key = os.getenv("TAVILY_API_KEY")
+
+if not api_key:
+    api_key = st.secrets["TAVILY_API_KEY"]
+
+tavily = TavilyClient(api_key=api_key)
 
 
 @tool
