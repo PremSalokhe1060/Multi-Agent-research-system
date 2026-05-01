@@ -4,11 +4,23 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from tools import web_search , scrape_url 
 from dotenv import load_dotenv
+import streamlit as st
+import os
 
 load_dotenv()
 
 #model setup 
-llm = ChatGroq(model = "llama-3.3-70b-versatile",temperature=0)
+# llm = ChatGroq(model = "llama-3.3-70b-versatile",temperature=0)
+api_key = os.getenv("GROQ_API_KEY")
+
+if not api_key:
+    api_key = st.secrets["GROQ_API_KEY"]
+
+llm = ChatGroq(
+    model="llama-3.3-70b-versatile",
+    temperature=0,
+    api_key=api_key
+)
 
 
 #1st agent 
